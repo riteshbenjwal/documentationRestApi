@@ -142,3 +142,108 @@ paths:
 
         500:
           description: Internal Server Error
+
+
+  /addcourse:
+    post:
+      tags:
+        - String
+      summary: adds a new course to existing courses
+      consumes: 
+        - application/json
+      produces:
+        - application/json  
+      requestBody:
+        reqiured: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                price:
+                  type: number
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          description: Bad Request
+
+        500:
+          description: Internal Server Error
+
+
+  /coursequery:
+    get:
+      tags:
+        - String
+      summary: trying to learn about query
+      parameters:
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [Bangalore, Mumbai, Pune]
+        - name: device
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [web, mobile, desktop]
+             
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                  device:
+                    type: string
+        400:
+          description: Bad Request
+
+        500:
+          description: Internal Server Error
+
+
+
+  /courseupload:
+    post:
+      tags:
+        - String
+      summary: uploading images
+      parameters:
+        - in: header
+          name: Authorization
+        
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: A successful response
+        
+        400:
+          description: Bad Request
+
+        500:
+          description: Internal Server Error
